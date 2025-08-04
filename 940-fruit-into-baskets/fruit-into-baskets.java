@@ -1,3 +1,4 @@
+import java.util.*;
 class Solution {
     public int totalFruit(int[] fruits) {
         Map<Integer, Integer> basket = new HashMap<>();
