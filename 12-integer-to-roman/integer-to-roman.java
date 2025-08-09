@@ -1,9 +1,19 @@
 class Solution {
-    public static String intToRoman(int num) {
-        String M[] = {"", "M", "MM", "MMM"};
-        String C[] = {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
-        String X[] = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
-        String I[] = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
-        return M[num/1000] + C[(num%1000)/100] + X[(num%100)/10] + I[num%10];
+    public String intToRoman(int num)
+    {
+        String[] symbols = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+        int[] values = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        StringBuilder roman = new StringBuilder();
+        // Iterate through the values and symbols
+        for (int i = 0; i < values.length; i++) {
+            // While the current value can be subtracted from num
+            while (num >= values[i]) {
+                // Append the corresponding symbol to the result
+                roman.append(symbols[i]);
+                // Subtract the value from num
+                num -= values[i];
+            }
+        }
+        return roman.toString();   
     }
 }
