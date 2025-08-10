@@ -1,7 +1,8 @@
 class Solution {
     public boolean reorderedPowerOf2(int N) {
+        String target = counter(N);
         for (int i = 0; i < 31; i++) {
-            if(counter(N).equals(counter(1<<i))){
+            if(target.equals(counter(1<<i))){
                 return true;
             }
         }
