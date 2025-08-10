@@ -9,12 +9,16 @@ class Solution {
         return false;
     }
     private String counter(int N){
-        int[] a = new int[11];
+        int[] a = new int[10];
         while(N>0) {
             int d = N % 10;
             a[d]++;
             N/=10; 
         }
-        return Arrays.toString(a);
+        StringBuilder sb = new StringBuilder();
+        for (int c : a) {
+            sb.append(c);
+        } 
+        return sb.toString();
     }
 }
