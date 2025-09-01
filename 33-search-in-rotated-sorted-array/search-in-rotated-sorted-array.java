@@ -1,55 +1,25 @@
 class Solution {
     public int search(int[] nums, int target) {
-        return Rotated_BS(nums, target);
+        return search(nums, target, 0, nums.length-1);
     }
-    static int Rotated_BS(int[] arr, int target){
-        int pivot = findPivot(arr);
-
-        if(pivot == -1){
-            return BinarySearch(arr, target, 0, arr.length-1);
+    public int search(int[] arr, int target, int start, int end){
+        if(start>end){
+            return -1;
         }
-        if(arr[pivot] == target){
-            return pivot;
+        int m = start + (end - start)/2;
+        if(arr[m] == target){
+            return m;
         }
-        if(target >= arr[0]){
-            return BinarySearch(arr, target, 0, pivot-1);
-        }
-        if(target < arr[0]){
-            return BinarySearch(arr, target, pivot + 1, arr.length -1);
-        }
-        return -1;
-    }
-    static int BinarySearch(int[] arr, int target, int start, int end){
-        while(start <= end){
-            int mid = start + (end - start)/2;
-            if(target < arr[mid]){
-                end = mid - 1;
-            }else if(target > arr[mid]){
-                start = mid + 1;
+        if(arr[start]<=arr[m]){
+            if(target>=arr[start] && target<=arr[m]){
+                return search(arr, target, start,m-1);
             }else{
-                return mid;
+                return search(arr, target, m+1, end);
             }
         }
-        return -1;
-    }
-    static int findPivot(int[] arr){
-        int start = 0;
-        int end = arr.length -1;
-
-        while(start <= end){
-            int mid = start + (end - start)/2;
-            if(mid < end && arr[mid] > arr[mid+1]){
-                return mid;
-            }
-            if(mid > start && arr[mid] < arr[mid -1]){
-                return mid-1;
-            }
-            if(arr[mid]<=arr[start]){
-                end = mid -1;
-            }else{
-                start = mid + 1;
-            }
+        if(target>=arr[m] && target<=arr[end]){
+            return search(arr, target, m+1,end);
         }
-        return -1;
+        return search(arr, target, start, m-1);
     }
 }
