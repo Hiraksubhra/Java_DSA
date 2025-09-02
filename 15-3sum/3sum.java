@@ -4,6 +4,7 @@ class Solution {
         Arrays.sort(nums);
         int n = nums.length;
         for(int i = 0; i<n-2; i++){
+            //Use two pointers 'j' and 'k' for the rest of the array
             if (i > 0 && nums[i] == nums[i - 1]) {
                 continue;
             }
@@ -14,7 +15,7 @@ class Solution {
                     result.add(Arrays.asList(nums[i], nums[j], nums[k]));
                     j++;
                     k--;
-
+                    //Skip duplicate elements for 'j' and 'k'
                     while (j < k && nums[j] == nums[j - 1]) {
                         j++;
                     }
