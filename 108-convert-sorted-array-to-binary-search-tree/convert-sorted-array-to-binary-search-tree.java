@@ -18,11 +18,10 @@ class Solution {
         return sortedArrayToBST(nums, 0 , nums.length-1);
     }
     private TreeNode sortedArrayToBST(int[] nums, int start, int end){
-        if (start > end) {
+        if(start > end){
             return null;
         }
-
-        int mid = start + (end - start) / 2;
+        int mid = start + (end - start)/2;
         TreeNode node = new TreeNode(nums[mid]);
 
         node.left = sortedArrayToBST(nums, start, mid - 1);
