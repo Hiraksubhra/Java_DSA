@@ -19,17 +19,14 @@ class Solution {
         return helper(root, k).val;
     }
     private TreeNode helper(TreeNode root, int k){
-        if(root == null){
-            return null;
-        }
+        if(root == null) return null;
+
         TreeNode left = helper(root.left, k);
-        if(left != null){
-            return left;
-        }
+        if(left != null) return left;
+
         count++;
-        if(count == k){
-            return root;
-        }
+        if(count == k) return root;
+
         return helper(root.right, k);
     }
 }
