@@ -15,44 +15,26 @@
  */
 class Solution {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>> list = new ArrayList<>();
+        List<List<Integer>> result = new ArrayList<>();
+        if(root == null) return result;
+        Queue<TreeNode> queue = new LinkedList<>();
 
-        if(root == null){
-            return list;
-        }
-        Deque<TreeNode> deque = new LinkedList<>();
-        boolean rev = false;
-        deque.offer(root);
-        while (!deque.isEmpty()) { 
-            int levelSize = deque.size();
-            List<Integer> currentLevel = new ArrayList<>(levelSize);
-            if(!rev){
-                for (int i = 0; i < levelSize; i++) {
-                    TreeNode currNode = deque.pollFirst();
-                    currentLevel.add(currNode.val);
-                    if(currNode.left != null){
-                        deque.addLast(currNode.left);
-                    }
-                    if(currNode.right != null){
-                        deque.addLast(currNode.right);
-                    }
-                }
-            }else{
-                for (int i = 0; i < levelSize; i++) {
-                    TreeNode currNode = deque.pollLast();
-                    currentLevel.add(currNode.val);
-                    if(currNode.right != null){
-                        deque.addFirst(currNode.right);
-                    }
-                    if(currNode.left != null){
-                        deque.addFirst(currNode.left);
-                    }
-                }
+        queue.offer(root);
+        boolean leftToRight = true;
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            List<Integer> curr = new ArrayList<>(size);
+            for(int i = 0; i<size; i++){
+                TreeNode node = queue.poll();
+                curr.add(node.val);
+
+                if(node.left != null) queue.offer(node.left);
+                if(node.right != null) queue.offer(node.right);
             }
-            
-            rev = (!rev);
-            list.add(currentLevel);
+            if(!leftToRight) Collections.reverse(curr);
+            leftToRight = !leftToRight;
+            result.add(curr);
         }
-        return list;
+        return result;
     }
 }
