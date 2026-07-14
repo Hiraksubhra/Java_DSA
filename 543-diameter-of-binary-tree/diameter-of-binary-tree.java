@@ -20,13 +20,14 @@ class Solution {
         helper(root);
         return maxDia;
     }
-    private int helper(TreeNode node){
-        if(node == null) return 0;
+    private int helper(TreeNode root){
+        if(root == null) return 0;
 
-        int left = helper(node.left);
-        int right = helper(node.right);
-        
+        int left = helper(root.left);
+        int right = helper(root.right);
+
         maxDia = Math.max(maxDia, left + right);
+
         return 1 + Math.max(left, right);
     }
 }
